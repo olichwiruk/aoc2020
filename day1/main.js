@@ -1,39 +1,35 @@
 const fs = require('fs')
 
-function calculate(filepath) {
-  const input = fs.readFileSync(filepath, 'utf8')
-  const numbers = input.split('\n').map(el => Number(el))
-  numbers.splice(-1, 1)
-
-  let isPair = false
-  const n = []
+function calculate(numbers, target = 2020) {
   for (var i = 0; i < numbers.length; i++) {
-    n.push(numbers[i])
-    for (var j = i; j < numbers.length; j++) {
-      n.push(numbers[j])
-      const difference = 2020 - n[0] - n[1]
-      isPair = difference > 0 && numbers.includes(difference)
-
-      if (isPair) {
-        n.push(difference)
-        break
-      } else {
-        n.splice(-1, 1)
-      }
-    }
-    if (isPair) {
-      break
-    } else {
-      n.splice(-1, 1)
-    }
+    const diff = target - numbers[i]
+    if (numbers.includes(diff)) { return numbers[i] * diff }
   }
-
-  return n[0] * n[1] * n[2];
 }
-module.exports = calculate;
+
+function calculate_3(numbers) {
+  for (var i = 0; i < numbers.length; i++) {
+    const diff = 2020 - numbers[i]
+    const rest = calculate(numbers, diff)
+    if (rest) { return rest * numbers[i] }
+  }
+}
+
+function parseInput(filepath) {
+  const input = fs.readFileSync(filepath, 'utf8').split('\n').map(el => Number(el))
+  input.splice(-1, 1)
+  return input
+}
+
+module.exports = {
+  parseInput,
+  calculate,
+  calculate_3
+}
 
 module.exports.run = () => {
   const filepath = `${__dirname}/input.txt`
-  const result = calculate(filepath)
+  const input = parseInput(filepath)
+  const result = calculate(input)
   console.log(result)
 }
