@@ -19,3 +19,9 @@ function calculate(filepath) {
   return n1 * n2;
 }
 module.exports = calculate;
+
+module.exports.run = () => {
+  const filepath = `${__dirname}/input.txt`
+  const result = calculate(filepath)
+  console.log(result)
+}
