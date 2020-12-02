@@ -1,7 +1,25 @@
 const fs = require('fs')
 
 function countNewValidPasswords(input) {
-  return 0
+  let counter = 0
+  input.forEach(el => { if (newValidate(el)) { counter++ } })
+  return counter
+}
+
+function newValidate(el) {
+  if (
+    (letterMatch(el.password, el.range.min, el.letter) &&
+    !letterMatch(el.password, el.range.max, el.letter)) ||
+    (!letterMatch(el.password, el.range.min, el.letter) &&
+    letterMatch(el.password, el.range.max, el.letter))
+  ) {
+    return true
+  }
+  return false
+}
+
+function letterMatch(payload, index, letter) {
+  return payload.charAt(index-1) == letter
 }
 
 function countValidPasswords(input) {
@@ -54,6 +72,6 @@ module.exports = {
 module.exports.run = () => {
   const filepath = `${__dirname}/input.txt`
   const input = parseInput(filepath)
-  const result = countValidPasswords(input)
+  const result = countNewValidPasswords(input)
   console.log(result)
 }
