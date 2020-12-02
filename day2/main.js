@@ -2,13 +2,17 @@ const fs = require('fs')
 
 function countValidPasswords(input) {
   let counter = 0
-  input.forEach(el => {
-    const letterNumber = countLetters(el.password, el.letter)
-    if (letterNumber >= el.range.min && letterNumber <= el.range.max) {
-      counter++
-    }
-  })
+  input.forEach(el => { if (validate(el)) { counter++ } })
   return counter
+}
+
+function validate(el) {
+  const letterNumber = countLetters(el.password, el.letter)
+  if (letterNumber >= el.range.min && letterNumber <= el.range.max) {
+    return true
+  }
+
+  return false
 }
 
 function countLetters(payload, letter) {
