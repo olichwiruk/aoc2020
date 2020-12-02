@@ -1,12 +1,12 @@
 const fs = require('fs')
 
-function countNewValidPasswords(input) {
+function countValidPasswords(input, validateCallback) {
   let counter = 0
-  input.forEach(el => { if (newValidate(el)) { counter++ } })
+  input.forEach(el => { if (validateCallback(el)) { counter++ } })
   return counter
 }
 
-function newValidate(el) {
+function newRulesValidate(el) {
   if (
     (letterMatch(el.password, el.range.min, el.letter) &&
     !letterMatch(el.password, el.range.max, el.letter)) ||
@@ -18,23 +18,17 @@ function newValidate(el) {
   return false
 }
 
-function letterMatch(payload, index, letter) {
-  return payload.charAt(index-1) == letter
-}
-
-function countValidPasswords(input) {
-  let counter = 0
-  input.forEach(el => { if (validate(el)) { counter++ } })
-  return counter
-}
-
-function validate(el) {
+function oldRulesValidate(el) {
   const letterNumber = countLetters(el.password, el.letter)
   if (letterNumber >= el.range.min && letterNumber <= el.range.max) {
     return true
   }
 
   return false
+}
+
+function letterMatch(payload, index, letter) {
+  return payload.charAt(index-1) == letter
 }
 
 function countLetters(payload, letter) {
@@ -66,12 +60,13 @@ function parseInput(filepath) {
 module.exports = {
   parseInput,
   countValidPasswords,
-  countNewValidPasswords
+  oldRulesValidate,
+  newRulesValidate
 }
 
 module.exports.run = () => {
   const filepath = `${__dirname}/input.txt`
   const input = parseInput(filepath)
-  const result = countNewValidPasswords(input)
+  const result = countValidPasswords(input, newRulesValidate)
   console.log(result)
 }

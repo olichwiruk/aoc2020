@@ -1,4 +1,6 @@
-const { parseInput, countValidPasswords, countNewValidPasswords } = require('./main')
+const {
+  parseInput, countValidPasswords, oldRulesValidate, newRulesValidate
+} = require('./main')
 
 test('count valid passwords', () => {
   const filepath = `${__dirname}/input_test.txt`
@@ -6,7 +8,7 @@ test('count valid passwords', () => {
 
   const result = 2
 
-  expect(countValidPasswords(input)).toBe(result);
+  expect(countValidPasswords(input, oldRulesValidate)).toBe(result);
 })
 
 test('count new valid passwords', () => {
@@ -15,5 +17,5 @@ test('count new valid passwords', () => {
 
   const result = 1
 
-  expect(countNewValidPasswords(input)).toBe(result);
+  expect(countValidPasswords(input, newRulesValidate)).toBe(result);
 })
