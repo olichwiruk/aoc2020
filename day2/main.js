@@ -1,5 +1,9 @@
 const fs = require('fs')
 
+function countNewValidPasswords(input) {
+  return 0
+}
+
 function countValidPasswords(input) {
   let counter = 0
   input.forEach(el => { if (validate(el)) { counter++ } })
@@ -43,7 +47,8 @@ function parseInput(filepath) {
 
 module.exports = {
   parseInput,
-  countValidPasswords
+  countValidPasswords,
+  countNewValidPasswords
 }
 
 module.exports.run = () => {
