@@ -1,7 +1,22 @@
 const fs = require('fs')
 
 function countValidPasswords(input) {
-  return 0
+  let counter = 0
+  input.forEach(el => {
+    const letterNumber = countLetters(el.password, el.letter)
+    if (letterNumber >= el.range.min && letterNumber <= el.range.max) {
+      counter++
+    }
+  })
+  return counter
+}
+
+function countLetters(payload, letter) {
+  let counter = 0
+  for (var i = 0; i < payload.length; i++) {
+    if (payload.charAt(i) == letter) { counter++ }
+  }
+  return counter
 }
 
 function parseInput(filepath) {
