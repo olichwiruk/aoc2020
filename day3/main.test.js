@@ -6,5 +6,5 @@ test('count trees 3x1', () => {
 
   const result = 7
 
-  expect(countTrees(input)).toBe(result);
+  expect(countTrees(input, 3, 1)).toBe(result);
 })
