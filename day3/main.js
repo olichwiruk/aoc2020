@@ -3,11 +3,11 @@ const fs = require('fs')
 function countTrees(input, stepX, stepY) {
   let count = 0
   const width = input[0].length
-  const repetition = Math.floor(width / stepX)
 
   for (y = stepY; y < input.length; y++) {
-    let x = (stepX * y + 1) - (width * Math.floor((y-1) / repetition))
-    if (x <= 0) { x += width }
+    let x = stepX * y + 1
+    while(x > width) { x = x - width }
+
     if (input[y].charAt(x-1) == "#"){
       count++
     }
