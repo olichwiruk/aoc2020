@@ -1,6 +1,6 @@
 const { parseInput, countValidPassports } = require('./main')
 
-test('test', () => {
+test('count valid passports', () => {
   const filepath = `${__dirname}/input_test.txt`
   const input = parseInput(filepath)
 

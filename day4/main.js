@@ -1,11 +1,20 @@
 const fs = require('fs')
 
 function countValidPassports(input) {
-  return 0
+  let counter = 0
+  input.forEach(passport => {
+    if (checkPassport(passport)) { counter++ }
+  })
+  return counter
 }
 
 function checkPassport(passport) {
-  return false
+  const requiredAttrs = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
+  const attrs = Object.keys(passport)
+  for (var i = 0; i < requiredAttrs.length; i++) {
+    if (!attrs.includes(requiredAttrs[i])) { return false }
+  }
+  return true
 }
 
 function parseInput(filepath) {
@@ -31,5 +40,6 @@ module.exports = {
 module.exports.run = () => {
   const filepath = `${__dirname}/input.txt`
   const input = parseInput(filepath)
-  console.log(input)
+  const result = countValidPassports(input)
+  console.log(result)
 }
