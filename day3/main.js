@@ -1,7 +1,12 @@
 const fs = require('fs')
 
 function checkManySlopes(input, slopes) {
-  return 0
+  const counts = []
+  slopes.forEach(slope => {
+    counts.push(countTrees(input, slope[0], slope[1]))
+  })
+  console.log(counts)
+  return counts.reduce((a, b) => a * b)
 }
 
 function countTrees(input, stepX, stepY) {
@@ -10,9 +15,9 @@ function countTrees(input, stepX, stepY) {
 
   for (y = stepY; y < input.length; y++) {
     let x = stepX * y + 1
-    while(x > width) { x = x - width }
+    while(x > width) { x -= width }
 
-    if (input[y].charAt(x-1) == "#"){
+    if (input[y].charAt(x - 1) == "#"){
       count++
     }
   }
