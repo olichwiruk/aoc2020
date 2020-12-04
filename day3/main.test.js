@@ -9,6 +9,24 @@ test('count trees 3x1', () => {
   expect(countTrees(input, 3, 1)).toBe(result);
 })
 
+test('count trees 3x1 real input', () => {
+  const filepath = `${__dirname}/input.txt`
+  const input = parseInput(filepath)
+
+  const result = 148
+
+  expect(countTrees(input, 3, 1)).toBe(result);
+})
+
+test('count trees 7x1', () => {
+  const filepath = `${__dirname}/input_test.txt`
+  const input = parseInput(filepath)
+
+  const result = 4
+
+  expect(countTrees(input, 7, 1)).toBe(result);
+})
+
 test('check many slopes', () => {
   const filepath = `${__dirname}/input_test.txt`
   const input = parseInput(filepath)
