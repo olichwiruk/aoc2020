@@ -12,9 +12,45 @@ function checkPassport(passport) {
   const requiredAttrs = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
   const attrs = Object.keys(passport)
   for (var i = 0; i < requiredAttrs.length; i++) {
-    if (!attrs.includes(requiredAttrs[i])) { return false }
+    const attr = requiredAttrs[i]
+    if (!attrs.includes(attr)) { return false }
+    if (!validate(attr, passport[attr])) { return false }
   }
   return true
+}
+
+function validate(attr, value) {
+  switch (attr) {
+    case 'byr':
+      if (value.length != 4 || value < 1920 || value > 2002) { return false }
+      break;
+    case 'iyr':
+      if (value.length != 4 || value < 2010 || value > 2020) { return false }
+      break;
+    case 'eyr':
+      if (value.length != 4 || value < 2020 || value > 2030) { return false }
+      break;
+    case 'hgt':
+      const type = value.substr(-2)
+      const num = value.substring(0, value.length - 2)
+      if (type == 'cm') {
+        if (num < 150 || num > 193) {return false}
+      } else if (type == 'in') {
+        if (num < 59 || num > 76) {return false}
+      } else { return false }
+      break;
+    case 'hcl':
+      if (!value.match(/^#[0-9a-fA-F]{6}$/)) { return false }
+      break;
+    case 'ecl':
+      const colors = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
+      if (!colors.includes(value)) { return false }
+      break;
+    case 'pid':
+      if (!value.match(/^[0-9]{9}$/)) { return false }
+      break;
+  }
+  return true;
 }
 
 function parseInput(filepath) {
@@ -34,7 +70,8 @@ function parseInput(filepath) {
 
 module.exports = {
   parseInput,
-  countValidPassports
+  countValidPassports,
+  validate
 }
 
 module.exports.run = () => {
