@@ -9,9 +9,18 @@ function checkPassport(passport) {
 }
 
 function parseInput(filepath) {
-  const input = fs.readFileSync(filepath, 'utf8').split('\n')
-  input.splice(-1, 1)
-  return input
+  let input = fs.readFileSync(filepath, 'utf8').split('\n\n')
+  return input.map(i => {
+    const attributes = i.replace(/\n/g, ' ').split(' ')
+    const mapped = {}
+    attributes.forEach(attr => {
+      splitted = attr.split(':')
+      if (splitted[0].length == 0) { return }
+      mapped[splitted[0]] = splitted[1]
+    })
+
+    return mapped
+  })
 }
 
 module.exports = {
