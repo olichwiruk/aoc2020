@@ -13,11 +13,14 @@ function countTrees(input, stepX, stepY) {
   let count = 0
   const width = input[0].length
 
-  for (y = stepY; y < input.length; y++) {
-    let x = stepX * y + 1
-    while(x > width) { x -= width }
+  for (i = 0; i < input.length; i++) {
+    let y = stepY * i
+    let x = stepX * i
+    if (!input[y]) { break }
 
-    if (input[y].charAt(x - 1) == "#"){
+    while(x > width-1) { x -= width }
+
+    if (input[y].charAt(x) == "#"){
       count++
     }
   }
