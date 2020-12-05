@@ -1,7 +1,19 @@
 const fs = require('fs')
 
 function calculateMaxId(input) {
-  return 0
+  const seats = input.map(i => mapInputToSeat(i))
+  return Math.max(...seats.map(s => s.id))
+}
+
+function mapInputToSeat(input) {
+  const rowInput = input.substr(0, input.length-3)
+  const colInput = input.substr(-3)
+  const rowBin = rowInput.replace(/B/g, '1').replace(/F/g, '0')
+  const colBin = colInput.replace(/R/g, '1').replace(/L/g, '0')
+  const row = parseInt(rowBin, 2)
+  const col = parseInt(colBin, 2)
+
+  return { id: row * 8 + col, row, col }
 }
 
 function parseInput(filepath) {
