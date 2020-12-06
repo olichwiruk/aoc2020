@@ -1,7 +1,19 @@
 const fs = require('fs')
 
 function countEveryPositiveAnswears(input) {
-  return 0
+  const groupsCounter = []
+  input.forEach(group => {
+    let counter = 0
+    const firstAnswears = group[0].split('')
+    firstAnswears.forEach(a => {
+      if (group.every(answear => answear.includes(a))) {
+        counter++
+      }
+    })
+
+    groupsCounter.push(counter)
+  })
+  return groupsCounter.reduce((a, b) => a + b)
 }
 
 function countAnyPositiveAnswears(input) {
