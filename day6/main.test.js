@@ -1,4 +1,4 @@
-const { parseInput, countPositiveAnswears } = require('./main')
+const { parseInput, countAnyPositiveAnswears } = require('./main')
 
 test('parser', () => {
   const filepath = `${__dirname}/input_test.txt`
@@ -10,11 +10,11 @@ test('parser', () => {
   expect(parseInput(filepath)).toStrictEqual(result);
 })
 
-test('test', () => {
+test('count any positive', () => {
   const filepath = `${__dirname}/input_test.txt`
   const input = parseInput(filepath)
 
   const result = 11
 
-  expect(countPositiveAnswears(input)).toBe(result);
+  expect(countAnyPositiveAnswears(input)).toBe(result);
 })
