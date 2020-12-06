@@ -1,5 +1,9 @@
 const fs = require('fs')
 
+function countEveryPositiveAnswears(input) {
+  return 0
+}
+
 function countAnyPositiveAnswears(input) {
   const uniqueAnswears = input.map(group => uniquifyAnswears(group))
   return uniqueAnswears.map(a => a.length).reduce((a, b) => a + b)
@@ -19,12 +23,13 @@ function parseInput(filepath) {
 
 module.exports = {
   parseInput,
-  countAnyPositiveAnswears
+  countAnyPositiveAnswears,
+  countEveryPositiveAnswears
 }
 
 module.exports.run = () => {
   const filepath = `${__dirname}/input.txt`
   const input = parseInput(filepath)
-  const result = countAnyPositiveAnswears(input)
+  const result = countEveryPositiveAnswears(input)
   console.log(result)
 }
