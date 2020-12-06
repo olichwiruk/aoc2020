@@ -1,8 +1,10 @@
 const fs = require('fs')
 
 function parseInput(filepath) {
-  const input = fs.readFileSync(filepath, 'utf8').split('\n')
-  input.splice(-1, 1)
+  const content = fs.readFileSync(filepath, 'utf8')
+  const groups = content.substr(0, content.length-1).split('\n\n')
+  const input = groups.map(group => group.split('\n'))
+
   return input
 }
 
