@@ -1,5 +1,20 @@
 const fs = require('fs')
 
+function countInsideBags(myBag, input, start = true) {
+  let counter = 0
+
+  const containing = input.find(bag => bag.name == myBag).contains
+  if (containing.length == 0) { return 1 }
+
+  containing.forEach(bag => {
+    const numberOfBags = countInsideBags(bag.name, input, false)
+    counter += bag.quantity * numberOfBags
+  })
+
+  if (start) { return counter }
+  return counter + 1
+}
+
 function countEventualyContainingBags(myBag, input) {
   const currentBags = [myBag]
   const checkedBags = []
@@ -8,8 +23,8 @@ function countEventualyContainingBags(myBag, input) {
     const currentBag = currentBags.shift()
 
     containingBags(currentBag, input).forEach(bag => {
-      if (!checkedBags.includes(bag)) {
-        currentBags.push(bag)
+      if (!checkedBags.includes(bag.name)) {
+        currentBags.push(bag.name)
       }
     })
 
@@ -23,7 +38,7 @@ function containingBags(myBag, input) {
   const containingBags = input.filter(bag => {
     return bag.contains.map(b => b.name).includes(myBag)
   })
-  return containingBags.map(b => b.name)
+  return containingBags
 }
 
 function parseInput(filepath) {
@@ -52,13 +67,14 @@ function parseInput(filepath) {
 
 module.exports = {
   parseInput,
-  countEventualyContainingBags
+  countEventualyContainingBags,
+  countInsideBags
 }
 
 module.exports.run = () => {
   const filepath = `${__dirname}/input.txt`
   const myBag = 'shiny gold'
   const input = parseInput(filepath)
-  const result = countEventualyContainingBags(myBag, input)
+  const result = countInsideBags(myBag, input)
   console.log(result)
 }
