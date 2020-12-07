@@ -1,10 +1,11 @@
-const { parseInput } = require('./main')
+const { parseInput, countContainingBags } = require('./main')
 
 test('test', () => {
   const filepath = `${__dirname}/input_test.txt`
+  const myBag = 'shiny gold'
   const input = parseInput(filepath)
 
-  const result = true
+  const result = 4
 
-  expect(false).toBe(result);
+  expect(countContainingBags(myBag, input)).toBe(result);
 })
