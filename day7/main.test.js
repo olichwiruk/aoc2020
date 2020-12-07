@@ -1,4 +1,4 @@
-const { parseInput, countContainingBags } = require('./main')
+const { parseInput, countEventualyContainingBags } = require('./main')
 
 test('test', () => {
   const filepath = `${__dirname}/input_test.txt`
@@ -7,5 +7,5 @@ test('test', () => {
 
   const result = 4
 
-  expect(countContainingBags(myBag, input)).toBe(result);
+  expect(countEventualyContainingBags(myBag, input)).toBe(result);
 })
