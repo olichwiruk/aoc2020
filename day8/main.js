@@ -1,5 +1,9 @@
 const fs = require('fs')
 
+function fixedAccumulator(input) {
+  return 0
+}
+
 function lastAccaumulator(input) {
   let accumulator = 0
   const checked = []
@@ -49,12 +53,13 @@ function parseInput(filepath) {
 
 module.exports = {
   parseInput,
-  lastAccaumulator
+  lastAccaumulator,
+  fixedAccumulator
 }
 
 module.exports.run = () => {
   const filepath = `${__dirname}/input.txt`
   const input = parseInput(filepath)
-  const result = lastAccaumulator(input)
+  const result = fixedAccaumulator(input)
   console.log(result)
 }
