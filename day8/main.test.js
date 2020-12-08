@@ -1,4 +1,4 @@
-const { parseInput, lastAccaumulator, fixedAccumulator } = require('./main')
+const { parseInput, lastAccumulator, fixedAccumulator } = require('./main')
 
 test('test', () => {
   const filepath = `${__dirname}/input_test.txt`
@@ -6,7 +6,7 @@ test('test', () => {
 
   const result = 5
 
-  expect(lastAccaumulator(input)).toBe(result);
+  expect(lastAccumulator(input)).toBe(result);
 })
 
 test('test 2', () => {

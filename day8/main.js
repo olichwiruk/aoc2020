@@ -22,7 +22,7 @@ function fixedAccumulator(input) {
   return result.accumulator
 }
 
-function lastAccaumulator(input) {
+function lastAccumulator(input) {
   return runProgram(input).accumulator
 }
 
@@ -86,7 +86,7 @@ function parseInput(filepath) {
 
 module.exports = {
   parseInput,
-  lastAccaumulator,
+  lastAccumulator,
   fixedAccumulator
 }
 
