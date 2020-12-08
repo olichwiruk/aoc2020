@@ -1,7 +1,36 @@
 const fs = require('fs')
 
 function lastAccaumulator(input) {
-  return 0
+  let accumulator = 0
+  const checked = []
+
+  let i = 0
+  let stop = false
+  while (i < input.length || stop) {
+    if (checked.includes(i)) {
+      stop = true
+      break
+    }
+
+    const step = input[i]
+    checked.push(i)
+    switch (step.op) {
+      case 'acc':
+        if (step.sign == '+') { accumulator += step.value }
+        else if (step.sign == '-') { accumulator -= step.value }
+        i++
+        break
+      case 'jmp':
+        if (step.sign == '+') { i += step.value }
+        else if (step.sign == '-') { i -= step.value }
+        break
+      case 'nop':
+        i++
+        break
+    }
+  }
+
+  return accumulator
 }
 
 function parseInput(filepath) {
