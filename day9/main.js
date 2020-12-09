@@ -1,7 +1,11 @@
 const fs = require('fs')
+const { calculate } = require('../day1/main')
 
-function firstWithoutSum(input, preamble) {
-  return 0
+function firstWithoutSum(input, preambleNumber) {
+  for (let i = preambleNumber; i < input.length; i++) {
+    const n = input[i]
+    if (!calculate(input.slice(i-preambleNumber, i), n)) { return n }
+  }
 }
 
 function parseInput(filepath) {
