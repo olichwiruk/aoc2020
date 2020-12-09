@@ -1,6 +1,10 @@
 const fs = require('fs')
 const { calculate } = require('../day1/main')
 
+function findWeakness(input, preambleNumber) {
+  return 0
+}
+
 function firstWithoutSum(input, preambleNumber) {
   for (let i = preambleNumber; i < input.length; i++) {
     const n = input[i]
@@ -16,7 +20,8 @@ function parseInput(filepath) {
 
 module.exports = {
   parseInput,
-  firstWithoutSum
+  firstWithoutSum,
+  findWeakness
 }
 
 module.exports.run = () => {
