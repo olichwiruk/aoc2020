@@ -6,5 +6,5 @@ test('test', () => {
 
   const result = true
 
-  expect(false).toBe(result);
+  expect(true).toBe(result);
 })
